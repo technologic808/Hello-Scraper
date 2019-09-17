@@ -1,9 +1,17 @@
-const rp = require('request-promise');
+const puppeteer = require('puppeteer');
 const url = 'https://www.reddit.com';
 
-rp(url)
+puppeteer
+    .launch()
+    .then(function (browser) {
+        return browser.newPage();
+    })
+    .then(function (page) {
+        return page.goto(url).then(function () {
+            return page.content();
+        });
+    })
     .then(function (html) {
-        //success!
         console.log(html);
     })
     .catch(function (err) {
