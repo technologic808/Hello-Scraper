@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const $ = require('cheerio');
 const url = 'https://www.reddit.com';
 
 puppeteer
@@ -12,7 +13,9 @@ puppeteer
         });
     })
     .then(function (html) {
-        console.log(html);
+        $('._eYtD2XCVieq6emjKBH3m', html).each(function () {
+            console.log($(this).text());
+        });
     })
     .catch(function (err) {
         //handle error
